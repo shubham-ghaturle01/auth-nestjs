@@ -40,14 +40,14 @@ export class AuthController {
   @Post('logout')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  async logout(@Request() req) {
+  async logout(@Request() req: any) {
     return this.authService.logout(req.user.id);
   }
 
   @Get('profile')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  async profile(@Request() req) {
+  async profile(@Request() req: any) {
     return { id: req.user.sub, email: req.user.email, role: req.user.role };
   }
 
@@ -67,7 +67,7 @@ export class AuthController {
   @Post('change-password')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  async changePassword(@Request() req, @Body() dto: ChangePasswordDto) {
+  async changePassword(@Request() req: any, @Body() dto: ChangePasswordDto) {
     return this.authService.changePassword(req.user.id, dto);
   }
 

@@ -5,5 +5,5 @@ export class VerifyEmailDto {
   @ApiProperty({ example: 'email_verification_token' })
   @IsString()
   @IsNotEmpty()
-  token: string;
+  token!: string;
 }
