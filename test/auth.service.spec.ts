@@ -30,6 +30,7 @@ describe('AuthService', () => {
     };
 
     jwtService = {
+      sign: jest.fn().mockReturnValue('token'),
       signAsync: jest.fn().mockResolvedValue('token'),
       verifyAsync: jest.fn().mockResolvedValue({ sub: mockUser.id, email: mockUser.email, role: mockUser.role }),
     };
@@ -48,14 +49,15 @@ describe('AuthService', () => {
   });
 
   it('should register a new user and send verification email', async () => {
-    jest.spyOn(bcrypt, 'hash').mockResolvedValue('hashed-password');
+    jest.spyOn(bcrypt as any, 'hash').mockResolvedValue('hashed-password');
+    (usersService as any).findByEmail = jest.fn().mockResolvedValue(null);
     await expect(service.register({ name: 'Jane', email: 'jane@example.com', password: 'secure123' })).resolves.toEqual({
       message: 'User registered. Please verify your email address.',
     });
   });
 
   it('should throw unauthorized for invalid login password', async () => {
-    jest.spyOn(bcrypt, 'compare').mockResolvedValue(false);
+    jest.spyOn(bcrypt as any, 'compare').mockResolvedValue(false);
     await expect(service.login({ email: 'jane@example.com', password: 'wrong' })).rejects.toThrow();
   });
 });
