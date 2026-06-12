@@ -17,6 +17,9 @@ async function bootstrap() {
   );
   app.useGlobalFilters(new AllExceptionsFilter());
 
+  // Prefix all API routes with /api so frontend proxy paths match
+  app.setGlobalPrefix('api');
+
   const config = new DocumentBuilder()
     .setTitle('Auth Module')
     .setDescription('Authentication module for NestJS using Prisma and PostgreSQL')

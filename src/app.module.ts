@@ -5,6 +5,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { TradesModule } from './trades/trades.module';
 import { UsersModule } from './users/users.module';
 import { RiskCalculatorModule } from './risk-calculator/risk-calculator.module';
+import { AnalyticsModule } from './analytics/analytics.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { RiskCalculatorModule } from './risk-calculator/risk-calculator.module';
     AuthModule,
     TradesModule,
     RiskCalculatorModule,
+    AnalyticsModule,
   ],
 })
 export class AppModule {}
